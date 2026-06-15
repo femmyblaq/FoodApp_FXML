@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefWidth="1050" prefHeight="680" styleClass="main-root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.javafxapp.CustomerDashboardController">
+    <children>
+        <Region styleClass="page-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <BorderPane styleClass="hero-card"
+                    AnchorPane.topAnchor="36.0" AnchorPane.bottomAnchor="36.0"
+                    AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="36.0">
+            <!-- Left Sidebar: Icon-Only with Tooltips -->
+            <left>
+                <VBox styleClass="dashboard-sidebar-icon" spacing="28" minWidth="75" maxWidth="75" prefWidth="75" alignment="TOP_CENTER">
+                    <padding>
+                        <Insets top="28" bottom="24" left="8" right="8" />
+                    </padding>
+                    <children>
+                        <!-- Navigation List -->
+                        <VBox spacing="14" VBox.vgrow="ALWAYS" alignment="TOP_CENTER">
+                            <children>
+                                <Button text="🏠" alignment="CENTER">
+                                    <styleClass>
+                                        <String fx:value="sidebar-icon-button" />
+                                        <String fx:value="nav-active" />
+                                    </styleClass>
+                                    <tooltip>
+                                        <Tooltip text="Order Menu" />
+                                    </tooltip>
+                                </Button>
+                                <Button text="📜" alignment="CENTER" styleClass="sidebar-icon-button">
+                                    <tooltip>
+                                        <Tooltip text="My Orders" />
+                                    </tooltip>
+                                </Button>
+                                <Button text="💖" alignment="CENTER" styleClass="sidebar-icon-button">
+                                    <tooltip>
+                                        <Tooltip text="Favorites" />
+                                    </tooltip>
+                                </Button>
+                            </children>
+                        </VBox>
+
+                        <!-- Bottom Buttons -->
+                        <VBox spacing="14" alignment="BOTTOM_CENTER">
+                            <children>
+                                <Button text="⚙" alignment="CENTER" styleClass="sidebar-icon-button">
+                                    <tooltip>
+                                        <Tooltip text="Settings" />
+                                    </tooltip>
+                                </Button>
+                                <Button text="🚪" alignment="CENTER" onAction="#handleLogoutAction">
+                                    <styleClass>
+                                        <String fx:value="sidebar-icon-button" />
+                                        <String fx:value="logout-button" />
+                                    </styleClass>
+                                    <tooltip>
+                                        <Tooltip text="Logout" />
+                                    </tooltip>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </left>
+
+            <!-- Center Dashboard Scrollable Panel -->
+            <center>
+                <ScrollPane fitToWidth="true" styleClass="dashboard-scrollpane" BorderPane.alignment="CENTER">
+                    <content>
+                        <VBox spacing="24" styleClass="dashboard-content">
+                            <padding>
+                                <Insets top="28" bottom="28" left="28" right="28" />
+                            </padding>
+                            <children>
+                                <!-- Top Header: Search & User Controls -->
+                                <HBox alignment="CENTER_LEFT" spacing="16" styleClass="content-header">
+                                    <children>
+                                        <Label styleClass="brand-logo" text="InstantBite" />
+                                        <Region prefWidth="12" />
+                                        <TextField promptText="Search dishes..." styleClass="dashboard-search" HBox.hgrow="ALWAYS" maxWidth="400" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="headerCartBtn" styleClass="dashboard-header-button" text="🛒 Cart (0)" />
+                                    </children>
+                                </HBox>
+
+                                <!-- Dashboard Title & Welcome -->
+                                <VBox spacing="4">
+                                    <children>
+                                        <Label fx:id="welcomeLabel" styleClass="dashboard-title-text" text="Welcome Back, Foodie!" />
+                                        <Label styleClass="dashboard-subtitle-text" text="Hungry? Let's order some delicious wings and burgers!" />
+                                    </children>
+                                </VBox>
+
+                                <!-- Stats Metrics Row -->
+                                <HBox spacing="16" alignment="CENTER" styleClass="stats-row">
+                                    <children>
+                                        <!-- Metric 1 -->
+                                        <VBox styleClass="stat-card" spacing="8" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets top="16" bottom="16" left="20" right="20" />
+                                            </padding>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Label styleClass="stat-card-title" text="My Orders" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label styleClass="stat-card-emoji" text="📦" />
+                                                    </children>
+                                                </HBox>
+                                                <Label fx:id="totalOrdersLabel" styleClass="stat-card-value" text="0 Orders" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Metric 2 -->
+                                        <VBox styleClass="stat-card" spacing="8" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets top="16" bottom="16" left="20" right="20" />
+                                            </padding>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Label styleClass="stat-card-title" text="Total Spend" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label styleClass="stat-card-emoji" text="💳" />
+                                                    </children>
+                                                </HBox>
+                                                <Label fx:id="totalSpendLabel" styleClass="stat-card-value" text="\$0.00" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Metric 3 -->
+                                        <VBox styleClass="stat-card" spacing="8" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets top="16" bottom="16" left="20" right="20" />
+                                            </padding>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Label styleClass="stat-card-title" text="Loyalty Points" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label styleClass="stat-card-emoji" text="🌟" />
+                                                    </children>
+                                                </HBox>
+                                                <Label fx:id="loyaltyPointsLabel" styleClass="stat-card-value" text="0 Points" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Split Section: Menu on Left, Cart and History on Right -->
+                                <HBox spacing="20" alignment="TOP_LEFT" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <!-- Left side: Menu items -->
+                                        <VBox spacing="20" HBox.hgrow="ALWAYS">
+                                            <children>
+                                                <!-- Category Filters -->
+                                                <VBox spacing="10">
+                                                    <children>
+                                                        <Label styleClass="section-title" text="Browse Categories" />
+                                                        <HBox spacing="12" styleClass="filter-bar">
+                                                            <children>
+                                                                <Button fx:id="filterAllBtn" text="All Foods" minWidth="-Infinity" onAction="#handleFilterAll">
+                                                                    <styleClass>
+                                                                        <String fx:value="filter-button" />
+                                                                        <String fx:value="filter-active" />
+                                                                    </styleClass>
+                                                                </Button>
+                                                                <Button fx:id="filterBurgersBtn" styleClass="filter-button" text="🍔 Burgers" minWidth="-Infinity" onAction="#handleFilterBurgers" />
+                                                                <Button fx:id="filterSandwichesBtn" styleClass="filter-button" text="🥪 Sandwiches" minWidth="-Infinity" onAction="#handleFilterSandwiches" />
+                                                                <Button fx:id="filterPizzaBtn" styleClass="filter-button" text="🍕 Pizza" minWidth="-Infinity" onAction="#handleFilterPizza" />
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Product Grid -->
+                                                <VBox spacing="14">
+                                                    <children>
+                                                        <Label styleClass="section-title" text="Featured Menu" />
+                                                        <FlowPane fx:id="productsGrid" alignment="TOP_LEFT" hgap="24" vgap="24" styleClass="products-grid">
+                                                            <!-- Dynamic food items go here -->
+                                                        </FlowPane>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Right side: Cart & Recent Orders -->
+                                        <VBox spacing="20" minWidth="340" maxWidth="340" prefWidth="340">
+                                            <children>
+                                                <!-- Shopping Cart Panel -->
+                                                <VBox styleClass="dashboard-panel-card" spacing="12">
+                                                    <padding>
+                                                        <Insets top="18" bottom="18" left="18" right="18" />
+                                                    </padding>
+                                                    <children>
+                                                        <Label styleClass="panel-card-title" text="My Shopping Cart" />
+                                                        <VBox fx:id="cartList" spacing="10" minHeight="120" styleClass="recent-orders-list">
+                                                            <!-- Dynamic cart items go here -->
+                                                            <children>
+                                                                <Label text="Your cart is empty. Add some tasty items!" styleClass="order-row-date" alignment="CENTER" prefWidth="300" />
+                                                            </children>
+                                                        </VBox>
+                                                        <Region styleClass="stat-divider" prefHeight="1" />
+                                                        <HBox alignment="CENTER_LEFT">
+                                                            <children>
+                                                                <Label text="Subtotal:" styleClass="field-label" />
+                                                                <Region HBox.hgrow="ALWAYS" />
+                                                                <Label fx:id="cartSubtotalLabel" text="\$0.00" styleClass="brand-logo" />
+                                                            </children>
+                                                        </HBox>
+                                                        <Button fx:id="checkoutBtn" text="Checkout &amp; Place Order" styleClass="nav-cta" prefWidth="300" onAction="#handleCheckout" disable="true" />
+                                                    </children>
+                                                </VBox>
+
+                                                <!-- Personal Order History -->
+                                                <VBox styleClass="dashboard-panel-card" spacing="12">
+                                                    <padding>
+                                                        <Insets top="18" bottom="18" left="18" right="18" />
+                                                    </padding>
+                                                    <children>
+                                                        <Label styleClass="panel-card-title" text="My Recent Orders" />
+                                                        <VBox fx:id="recentOrdersList" spacing="10" styleClass="recent-orders-list">
+                                                            <!-- Dynamic order rows go here -->
+                                                        </VBox>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

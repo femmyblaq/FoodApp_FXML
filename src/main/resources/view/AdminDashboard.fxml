@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="680" prefWidth="1050" styleClass="main-root" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.javafxapp.AdminDashboardController">
+    <children>
+        <Region styleClass="page-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <BorderPane styleClass="hero-card" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="36.0">
+            <!-- Left Sidebar: Icon-Only with Tooltips -->
+            <left>
+                <VBox alignment="TOP_CENTER" maxWidth="75" minWidth="75" prefWidth="75" spacing="28" styleClass="dashboard-sidebar-icon">
+                    <padding>
+                        <Insets bottom="24" left="8" right="8" top="28" />
+                    </padding>
+                    <children>
+                        <!-- Navigation List -->
+                        <VBox alignment="TOP_CENTER" spacing="14" VBox.vgrow="ALWAYS">
+                            <children>
+                                <Button alignment="CENTER" text="📊">
+                                    <styleClass>
+                                        <String fx:value="sidebar-icon-button" />
+                                        <String fx:value="nav-active" />
+                                    </styleClass>
+                                    <tooltip>
+                                        <Tooltip text="Admin Dashboard" />
+                                    </tooltip>
+                                </Button>
+                                <Button alignment="CENTER" styleClass="sidebar-icon-button" text="🍔">
+                                    <tooltip>
+                                        <Tooltip text="Manage Menu" />
+                                    </tooltip>
+                                </Button>
+                                <Button alignment="CENTER" styleClass="sidebar-icon-button" text="👥">
+                                    <tooltip>
+                                        <Tooltip text="Manage Users" />
+                                    </tooltip>
+                                </Button>
+                            </children>
+                        </VBox>
+
+                        <!-- Bottom Buttons -->
+                        <VBox alignment="BOTTOM_CENTER" spacing="14">
+                            <children>
+                                <Button alignment="CENTER" styleClass="sidebar-icon-button" text="⚙">
+                                    <tooltip>
+                                        <Tooltip text="Settings" />
+                                    </tooltip>
+                                </Button>
+                                <Button alignment="CENTER" onAction="#handleLogoutAction" text="🚪">
+                                    <styleClass>
+                                        <String fx:value="sidebar-icon-button" />
+                                        <String fx:value="logout-button" />
+                                    </styleClass>
+                                    <tooltip>
+                                        <Tooltip text="Logout" />
+                                    </tooltip>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </left>
+
+            <!-- Center Dashboard Scrollable Panel -->
+            <center>
+                <ScrollPane fitToWidth="true" styleClass="dashboard-scrollpane" BorderPane.alignment="CENTER">
+                    <content>
+                        <VBox spacing="24" styleClass="dashboard-content">
+                            <padding>
+                                <Insets bottom="28" left="28" right="28" top="28" />
+                            </padding>
+                            <children>
+                                <!-- Top Header: Search & User Controls -->
+                                <HBox alignment="CENTER_LEFT" spacing="16" styleClass="content-header">
+                                    <children>
+                                        <Label styleClass="brand-logo" text="InstantBite Admin" />
+                                        <Region prefWidth="12" />
+                                        <TextField maxWidth="400" promptText="Search system orders, revenue, users..." styleClass="dashboard-search" HBox.hgrow="ALWAYS" />
+                                        <Region HBox.hgrow="ALWAYS" />
+                                        <Button styleClass="dashboard-header-button" text="👤 Admin Panel" />
+                                    </children>
+                                </HBox>
+
+                                <!-- Dashboard Title & Welcome -->
+                                <VBox spacing="4">
+                                    <children>
+                                        <Label fx:id="welcomeLabel" styleClass="dashboard-title-text" text="Welcome Back, Admin!" />
+                                        <Label styleClass="dashboard-subtitle-text" text="Here is the global system overview of InstantBite today." />
+                                    </children>
+                                </VBox>
+
+                                <!-- Stats Metrics Row -->
+                                <HBox alignment="CENTER" spacing="16" styleClass="stats-row">
+                                    <children>
+                                        <!-- Metric 1 -->
+                                        <VBox spacing="8" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets bottom="16" left="20" right="20" top="16" />
+                                            </padding>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Label styleClass="stat-card-title" text="Total System Orders" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label styleClass="stat-card-emoji" text="📦" />
+                                                    </children>
+                                                </HBox>
+                                                <Label fx:id="totalOrdersLabel" styleClass="stat-card-value" text="0 Orders" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Metric 2 -->
+                                        <VBox spacing="8" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets bottom="16" left="20" right="20" top="16" />
+                                            </padding>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Label styleClass="stat-card-title" text="Total Store Revenue" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label styleClass="stat-card-emoji" text="💳" />
+                                                    </children>
+                                                </HBox>
+                                                <Label fx:id="totalSpendLabel" styleClass="stat-card-value" text="\$0.00" />
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Metric 3 -->
+                                        <VBox spacing="8" styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets bottom="16" left="20" right="20" top="16" />
+                                            </padding>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Label styleClass="stat-card-title" text="Total Active Users" />
+                                                        <Region HBox.hgrow="ALWAYS" />
+                                                        <Label styleClass="stat-card-emoji" text="👥" />
+                                                    </children>
+                                                </HBox>
+                                                <Label fx:id="loyaltyPointsLabel" styleClass="stat-card-value" text="0 Users" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Split Section: Spend Chart & Recent Orders -->
+                                <HBox alignment="TOP_LEFT" spacing="20" VBox.vgrow="ALWAYS">
+                                    <children>
+                                        <!-- Spending Chart Card -->
+                                        <VBox spacing="12" styleClass="dashboard-panel-card" HBox.hgrow="ALWAYS">
+                                            <padding>
+                                                <Insets bottom="18" left="18" right="18" top="18" />
+                                            </padding>
+                                            <children>
+                                                <Label styleClass="panel-card-title" text="Store Sales Analysis (Last 7 Days)" />
+                                                <LineChart fx:id="spendChart" prefHeight="220" styleClass="analytics-chart">
+                                                    <xAxis>
+                                                        <CategoryAxis side="BOTTOM" />
+                                                    </xAxis>
+                                                    <yAxis>
+                                                        <NumberAxis side="LEFT" />
+                                                    </yAxis>
+                                                </LineChart>
+                                            </children>
+                                        </VBox>
+
+                                        <!-- Recent Orders Card -->
+                                        <VBox maxWidth="320" minWidth="320" prefWidth="320" spacing="12" styleClass="dashboard-panel-card">
+                                            <padding>
+                                                <Insets bottom="18" left="18" right="18" top="18" />
+                                            </padding>
+                                            <children>
+                                                <Label styleClass="panel-card-title" text="All System Orders" />
+                                                <VBox fx:id="recentOrdersList" spacing="10" styleClass="recent-orders-list">
+                                                    <children>
+                                                        <!-- Dynamic System Orders go here -->
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+
+                                <!-- Featured Product Grid -->
+                                <VBox spacing="14">
+                                    <children>
+                                        <Label styleClass="section-title" text="Restaurant Menu Catalog" />
+                                        <FlowPane fx:id="productsGrid" alignment="TOP_LEFT" hgap="24" styleClass="products-grid" vgap="24">
+                                            <!-- Dynamic Catalog Items go here -->
+                                        </FlowPane>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
