@@ -1,251 +1,409 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
+<?import com.gluonhq.charm.glisten.control.DropdownButton?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefWidth="1050" prefHeight="680" styleClass="main-root" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.javafxapp.CustomerDashboardController">
-    <children>
-        <Region styleClass="page-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <BorderPane styleClass="hero-card"
-                    AnchorPane.topAnchor="36.0" AnchorPane.bottomAnchor="36.0"
-                    AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="36.0">
-            <!-- Left Sidebar: Icon-Only with Tooltips -->
-            <left>
-                <VBox styleClass="dashboard-sidebar-icon" spacing="28" minWidth="75" maxWidth="75" prefWidth="75" alignment="TOP_CENTER">
-                    <padding>
-                        <Insets top="28" bottom="24" left="8" right="8" />
-                    </padding>
-                    <children>
-                        <!-- Navigation List -->
-                        <VBox spacing="14" VBox.vgrow="ALWAYS" alignment="TOP_CENTER">
-                            <children>
-                                <Button text="🏠" alignment="CENTER">
-                                    <styleClass>
-                                        <String fx:value="sidebar-icon-button" />
-                                        <String fx:value="nav-active" />
-                                    </styleClass>
-                                    <tooltip>
-                                        <Tooltip text="Order Menu" />
-                                    </tooltip>
-                                </Button>
-                                <Button text="📜" alignment="CENTER" styleClass="sidebar-icon-button">
-                                    <tooltip>
-                                        <Tooltip text="My Orders" />
-                                    </tooltip>
-                                </Button>
-                                <Button text="💖" alignment="CENTER" styleClass="sidebar-icon-button">
-                                    <tooltip>
-                                        <Tooltip text="Favorites" />
-                                    </tooltip>
-                                </Button>
-                            </children>
-                        </VBox>
-
-                        <!-- Bottom Buttons -->
-                        <VBox spacing="14" alignment="BOTTOM_CENTER">
-                            <children>
-                                <Button text="⚙" alignment="CENTER" styleClass="sidebar-icon-button">
-                                    <tooltip>
-                                        <Tooltip text="Settings" />
-                                    </tooltip>
-                                </Button>
-                                <Button text="🚪" alignment="CENTER" onAction="#handleLogoutAction">
-                                    <styleClass>
-                                        <String fx:value="sidebar-icon-button" />
-                                        <String fx:value="logout-button" />
-                                    </styleClass>
-                                    <tooltip>
-                                        <Tooltip text="Logout" />
-                                    </tooltip>
-                                </Button>
-                            </children>
-                        </VBox>
-                    </children>
-                </VBox>
-            </left>
-
-            <!-- Center Dashboard Scrollable Panel -->
-            <center>
-                <ScrollPane fitToWidth="true" styleClass="dashboard-scrollpane" BorderPane.alignment="CENTER">
-                    <content>
-                        <VBox spacing="24" styleClass="dashboard-content">
-                            <padding>
-                                <Insets top="28" bottom="28" left="28" right="28" />
-                            </padding>
-                            <children>
-                                <!-- Top Header: Search & User Controls -->
-                                <HBox alignment="CENTER_LEFT" spacing="16" styleClass="content-header">
-                                    <children>
-                                        <Label styleClass="brand-logo" text="InstantBite" />
-                                        <Region prefWidth="12" />
-                                        <TextField promptText="Search dishes..." styleClass="dashboard-search" HBox.hgrow="ALWAYS" maxWidth="400" />
-                                        <Region HBox.hgrow="ALWAYS" />
-                                        <Button fx:id="headerCartBtn" styleClass="dashboard-header-button" text="🛒 Cart (0)" />
-                                    </children>
-                                </HBox>
-
-                                <!-- Dashboard Title & Welcome -->
-                                <VBox spacing="4">
-                                    <children>
-                                        <Label fx:id="welcomeLabel" styleClass="dashboard-title-text" text="Welcome Back, Foodie!" />
-                                        <Label styleClass="dashboard-subtitle-text" text="Hungry? Let's order some delicious wings and burgers!" />
-                                    </children>
-                                </VBox>
-
-                                <!-- Stats Metrics Row -->
-                                <HBox spacing="16" alignment="CENTER" styleClass="stats-row">
-                                    <children>
-                                        <!-- Metric 1 -->
-                                        <VBox styleClass="stat-card" spacing="8" HBox.hgrow="ALWAYS">
-                                            <padding>
-                                                <Insets top="16" bottom="16" left="20" right="20" />
-                                            </padding>
-                                            <children>
-                                                <HBox alignment="CENTER_LEFT">
-                                                    <children>
-                                                        <Label styleClass="stat-card-title" text="My Orders" />
-                                                        <Region HBox.hgrow="ALWAYS" />
-                                                        <Label styleClass="stat-card-emoji" text="📦" />
-                                                    </children>
+<AnchorPane prefHeight="761.0" prefWidth="1112.0" styleClass="main-root" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.DentonFX.controller.CustomerDashboardController">
+   <children>
+      <BorderPane layoutX="70.0" layoutY="4.0" prefHeight="670.0" prefWidth="972.0">
+         <top>
+            <HBox alignment="TOP_RIGHT" prefHeight="188.0" prefWidth="952.0" style="-fx-background-color: #fff; -fx-background-radius: 30;" BorderPane.alignment="CENTER">
+               <effect>
+                  <DropShadow height="13.59" radius="10.372499999999999" width="29.9">
+                     <color>
+                        <Color red="0.46052631735801697" green="0.44986599683761597" blue="0.44986599683761597" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <children>
+                  <VBox prefHeight="194.0" prefWidth="932.0" spacing="20.0">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="912.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="133.0" style="-fx-background-radius: 20;" text="Cart Item">
+                                 <textFill>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </textFill>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcom HY Devinton!">
+                           <font>
+                              <Font name="System Bold" size="38.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Experience the ultimate convenience with " wrappingWidth="360.9830722808838">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Text>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </top>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <left>
+            <VBox prefHeight="503.0" prefWidth="716.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="713.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Available Food">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="713.0" spacing="20.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category:" wrappingWidth="81.806640625">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <DropdownButton minHeight="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="132.0" style="-fx-background-radius: 20;">
+                            <items>
+                                <MenuItem text="All" />
+                                <MenuItem text="Dessert" />
+                                <MenuItem text="Breakfast" />
+                              <MenuItem text="Platta" />
+                              <MenuItem text="Breakfast" />
+                            </items>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </DropdownButton>
+                     </children>
+                  </HBox>
+                  <ScrollPane minHeight="-Infinity" prefHeight="387.0" prefWidth="696.0">
+                     <content>
+                        <VBox spacing="15.0">
+                           <children>
+                              <HBox prefHeight="286.0" prefWidth="606.0" spacing="15.0">
+                                 <children>
+                                    <VBox minHeight="-Infinity" prefHeight="393.0" prefWidth="320.0" style="-fx-border-color: #ccc; -fx-background-radius: 5;">
+                                       <children>
+                                          <VBox prefHeight="213.0" prefWidth="318.0">
+                                             <children>
+                                                <ImageView fitHeight="407.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="https://img.magnific.com/free-photo/side-view-hamburger-grilled-beef-patty-with-melted-cheese-sauce-lettuce-burger-buns-french-fries-table_141793-4953.jpg?ga=GA1.1.1197684942.1780568556&amp;semt=ais_test_c&amp;w=740&amp;q=80" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D />
+                                                   </viewport>
+                                                </ImageView>
+                                             </children>
+                                             <effect>
+                                                <DropShadow blurType="ONE_PASS_BOX" height="121.81" radius="29.9525" width="0.0">
+                                                   <color>
+                                                      <Color red="0.6973684430122375" green="0.6876827478408813" blue="0.6876827478408813" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                          </VBox>
+                                          <VBox prefHeight="159.0" prefWidth="318.0" spacing="5.0" style="-fx-background-color: #fff;">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Burger and Fries">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$5.99">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="308.0">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" wrappingWidth="166.38150787353516" />
+                                                      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="17.0" minWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="-">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <TextField prefHeight="26.0" prefWidth="31.0" promptText="1" />
+                                                      <Button minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="+">
+                                                         <font>
+                                                            <Font size="28.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
                                                 </HBox>
-                                                <Label fx:id="totalOrdersLabel" styleClass="stat-card-value" text="0 Orders" />
-                                            </children>
-                                        </VBox>
-
-                                        <!-- Metric 2 -->
-                                        <VBox styleClass="stat-card" spacing="8" HBox.hgrow="ALWAYS">
-                                            <padding>
-                                                <Insets top="16" bottom="16" left="20" right="20" />
-                                            </padding>
-                                            <children>
-                                                <HBox alignment="CENTER_LEFT">
-                                                    <children>
-                                                        <Label styleClass="stat-card-title" text="Total Spend" />
-                                                        <Region HBox.hgrow="ALWAYS" />
-                                                        <Label styleClass="stat-card-emoji" text="💳" />
-                                                    </children>
+                                                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="308.0" style="-fx-background-radius: 50; -fx-background-color: gold;" text="Place Order">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox minHeight="-Infinity" prefHeight="393.0" prefWidth="320.0" style="-fx-border-color: #ccc; -fx-background-radius: 5;">
+                                       <children>
+                                          <VBox prefHeight="213.0" prefWidth="318.0">
+                                             <children>
+                                                <ImageView fitHeight="407.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="https://img.magnific.com/free-photo/side-view-hamburger-grilled-beef-patty-with-melted-cheese-sauce-lettuce-burger-buns-french-fries-table_141793-4953.jpg?ga=GA1.1.1197684942.1780568556&amp;semt=ais_test_c&amp;w=740&amp;q=80" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D />
+                                                   </viewport>
+                                                </ImageView>
+                                             </children>
+                                             <effect>
+                                                <DropShadow blurType="ONE_PASS_BOX" height="121.81" radius="29.9525" width="0.0">
+                                                   <color>
+                                                      <Color red="0.6973684430122375" green="0.6876827478408813" blue="0.6876827478408813" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                          </VBox>
+                                          <VBox prefHeight="159.0" prefWidth="318.0" spacing="5.0" style="-fx-background-color: #fff;">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Burger and Fries">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$5.99">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="308.0">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" wrappingWidth="166.38150787353516" />
+                                                      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="17.0" minWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="-">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <TextField prefHeight="26.0" prefWidth="31.0" promptText="1" />
+                                                      <Button minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="+">
+                                                         <font>
+                                                            <Font size="28.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
                                                 </HBox>
-                                                <Label fx:id="totalSpendLabel" styleClass="stat-card-value" text="\$0.00" />
-                                            </children>
-                                        </VBox>
-
-                                        <!-- Metric 3 -->
-                                        <VBox styleClass="stat-card" spacing="8" HBox.hgrow="ALWAYS">
-                                            <padding>
-                                                <Insets top="16" bottom="16" left="20" right="20" />
-                                            </padding>
-                                            <children>
-                                                <HBox alignment="CENTER_LEFT">
-                                                    <children>
-                                                        <Label styleClass="stat-card-title" text="Loyalty Points" />
-                                                        <Region HBox.hgrow="ALWAYS" />
-                                                        <Label styleClass="stat-card-emoji" text="🌟" />
-                                                    </children>
+                                                <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="308.0" style="-fx-background-radius: 50; -fx-background-color: gold;" text="Place Order">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="10.0" prefHeight="286.0" prefWidth="606.0" spacing="15.0">
+                                 <children>
+                                    <VBox prefHeight="281.0" prefWidth="274.0" style="-fx-border-color: #ccc; -fx-background-radius: 5;">
+                                       <children>
+                                          <VBox prefHeight="601.0" prefWidth="355.0">
+                                             <children>
+                                                <ImageView fitHeight="407.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="https://img.magnific.com/free-photo/side-view-hamburger-grilled-beef-patty-with-melted-cheese-sauce-lettuce-burger-buns-french-fries-table_141793-4953.jpg?ga=GA1.1.1197684942.1780568556&amp;semt=ais_test_c&amp;w=740&amp;q=80" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D />
+                                                   </viewport>
+                                                </ImageView>
+                                             </children>
+                                             <effect>
+                                                <DropShadow blurType="ONE_PASS_BOX" height="121.81" radius="29.9525" width="0.0">
+                                                   <color>
+                                                      <Color red="0.6973684430122375" green="0.6876827478408813" blue="0.6876827478408813" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                          </VBox>
+                                          <VBox prefHeight="104.0" prefWidth="310.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Burger and Fries">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$5.99">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="308.0">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" wrappingWidth="166.38150787353516" />
+                                                      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="17.0" minWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="-">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <TextField prefHeight="26.0" prefWidth="31.0" promptText="1" />
+                                                      <Button minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="+">
+                                                         <font>
+                                                            <Font size="28.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
                                                 </HBox>
-                                                <Label fx:id="loyaltyPointsLabel" styleClass="stat-card-value" text="0 Points" />
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </HBox>
-
-                                <!-- Split Section: Menu on Left, Cart and History on Right -->
-                                <HBox spacing="20" alignment="TOP_LEFT" VBox.vgrow="ALWAYS">
-                                    <children>
-                                        <!-- Left side: Menu items -->
-                                        <VBox spacing="20" HBox.hgrow="ALWAYS">
-                                            <children>
-                                                <!-- Category Filters -->
-                                                <VBox spacing="10">
-                                                    <children>
-                                                        <Label styleClass="section-title" text="Browse Categories" />
-                                                        <HBox spacing="12" styleClass="filter-bar">
-                                                            <children>
-                                                                <Button fx:id="filterAllBtn" text="All Foods" minWidth="-Infinity" onAction="#handleFilterAll">
-                                                                    <styleClass>
-                                                                        <String fx:value="filter-button" />
-                                                                        <String fx:value="filter-active" />
-                                                                    </styleClass>
-                                                                </Button>
-                                                                <Button fx:id="filterBurgersBtn" styleClass="filter-button" text="🍔 Burgers" minWidth="-Infinity" onAction="#handleFilterBurgers" />
-                                                                <Button fx:id="filterSandwichesBtn" styleClass="filter-button" text="🥪 Sandwiches" minWidth="-Infinity" onAction="#handleFilterSandwiches" />
-                                                                <Button fx:id="filterPizzaBtn" styleClass="filter-button" text="🍕 Pizza" minWidth="-Infinity" onAction="#handleFilterPizza" />
-                                                            </children>
-                                                        </HBox>
-                                                    </children>
-                                                </VBox>
-
-                                                <!-- Product Grid -->
-                                                <VBox spacing="14">
-                                                    <children>
-                                                        <Label styleClass="section-title" text="Featured Menu" />
-                                                        <FlowPane fx:id="productsGrid" alignment="TOP_LEFT" hgap="24" vgap="24" styleClass="products-grid">
-                                                            <!-- Dynamic food items go here -->
-                                                        </FlowPane>
-                                                    </children>
-                                                </VBox>
-                                            </children>
-                                        </VBox>
-
-                                        <!-- Right side: Cart & Recent Orders -->
-                                        <VBox spacing="20" minWidth="340" maxWidth="340" prefWidth="340">
-                                            <children>
-                                                <!-- Shopping Cart Panel -->
-                                                <VBox styleClass="dashboard-panel-card" spacing="12">
-                                                    <padding>
-                                                        <Insets top="18" bottom="18" left="18" right="18" />
-                                                    </padding>
-                                                    <children>
-                                                        <Label styleClass="panel-card-title" text="My Shopping Cart" />
-                                                        <VBox fx:id="cartList" spacing="10" minHeight="120" styleClass="recent-orders-list">
-                                                            <!-- Dynamic cart items go here -->
-                                                            <children>
-                                                                <Label text="Your cart is empty. Add some tasty items!" styleClass="order-row-date" alignment="CENTER" prefWidth="300" />
-                                                            </children>
-                                                        </VBox>
-                                                        <Region styleClass="stat-divider" prefHeight="1" />
-                                                        <HBox alignment="CENTER_LEFT">
-                                                            <children>
-                                                                <Label text="Subtotal:" styleClass="field-label" />
-                                                                <Region HBox.hgrow="ALWAYS" />
-                                                                <Label fx:id="cartSubtotalLabel" text="\$0.00" styleClass="brand-logo" />
-                                                            </children>
-                                                        </HBox>
-                                                        <Button fx:id="checkoutBtn" text="Checkout &amp; Place Order" styleClass="nav-cta" prefWidth="300" onAction="#handleCheckout" disable="true" />
-                                                    </children>
-                                                </VBox>
-
-                                                <!-- Personal Order History -->
-                                                <VBox styleClass="dashboard-panel-card" spacing="12">
-                                                    <padding>
-                                                        <Insets top="18" bottom="18" left="18" right="18" />
-                                                    </padding>
-                                                    <children>
-                                                        <Label styleClass="panel-card-title" text="My Recent Orders" />
-                                                        <VBox fx:id="recentOrdersList" spacing="10" styleClass="recent-orders-list">
-                                                            <!-- Dynamic order rows go here -->
-                                                        </VBox>
-                                                    </children>
-                                                </VBox>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </HBox>
-                            </children>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="248.0" prefWidth="272.0" />
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="281.0" prefWidth="274.0" style="-fx-border-color: #ccc; -fx-background-radius: 5;">
+                                       <children>
+                                          <VBox prefHeight="601.0" prefWidth="355.0">
+                                             <children>
+                                                <ImageView fitHeight="407.0" fitWidth="318.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="https://img.magnific.com/premium-photo/jollof-rice-with-fresh-thyme-sprigs-yummy-delicious-jollof-rice-food-photography_1295756-89568.jpg?ga=GA1.1.1197684942.1780568556&amp;semt=ais_test_c&amp;w=740&amp;q=80" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D />
+                                                   </viewport>
+                                                </ImageView>
+                                             </children>
+                                             <effect>
+                                                <DropShadow blurType="ONE_PASS_BOX" height="121.81" radius="29.9525" width="0.0">
+                                                   <color>
+                                                      <Color red="0.6973684430122375" green="0.6876827478408813" blue="0.6876827478408813" />
+                                                   </color>
+                                                </DropShadow>
+                                             </effect>
+                                          </VBox>
+                                          <VBox prefHeight="104.0" prefWidth="310.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nigerian Jollof">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$9.50">
+                                                   <font>
+                                                      <Font name="System Bold" size="23.0" />
+                                                   </font>
+                                                </Text>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="308.0">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" wrappingWidth="166.38150787353516" />
+                                                      <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="17.0" minWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="-">
+                                                         <font>
+                                                            <Font size="19.0" />
+                                                         </font>
+                                                      </Button>
+                                                      <TextField prefHeight="26.0" prefWidth="31.0" promptText="1" />
+                                                      <Button minWidth="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="35.0" text="+">
+                                                         <font>
+                                                            <Font size="28.0" />
+                                                         </font>
+                                                      </Button>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
                         </VBox>
-                    </content>
-                </ScrollPane>
-            </center>
-        </BorderPane>
-    </children>
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </left>
+      </BorderPane>
+      <VBox prefHeight="765.0" prefWidth="69.0" spacing="15.0" style="-fx-background-color: #fff;">
+         <effect>
+            <DropShadow radius="9.2575" spread="0.17" width="18.03">
+               <color>
+                  <Color red="0.30263158679008484" green="0.2956262230873108" blue="0.2956262230873108" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <HBox prefHeight="52.0" prefWidth="59.0" style="-fx-background-color: #EE7600; -fx-background-radius: 10;">
+               <children>
+                  <Icon content="HOME" prefHeight="97.0" prefWidth="107.0" style="-fx-text-fill: #fff;" />
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="52.0" prefWidth="59.0" style="-fx-background-radius: 10; -fx-background-color: #ddd;">
+               <children>
+                  <Icon content="HISTORY" prefHeight="97.0" prefWidth="107.0" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
 </AnchorPane>

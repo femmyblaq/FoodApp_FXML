@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="680" prefWidth="1050" styleClass="main-root" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.javafxapp.AdminDashboardController">
+<AnchorPane prefHeight="680" prefWidth="1050" styleClass="main-root" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.devintonFX.controller.AdminDashboardController">
     <children>
         <Region styleClass="page-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <BorderPane styleClass="hero-card" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="36.0">
@@ -213,5 +213,6 @@
                 </ScrollPane>
             </center>
         </BorderPane>
+      <Region layoutX="10.0" layoutY="10.0" styleClass="page-background" />
     </children>
 </AnchorPane>
