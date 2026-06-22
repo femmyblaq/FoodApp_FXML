@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        loadScene("/view/CustomerDashboard.fxml", "Dash");
+        loadScene("/view/register.fxml", "Register");
     }
     public static void loadScene(String fxml, String title) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));

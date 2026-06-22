@@ -9,4 +9,10 @@ public class LoginController {
     public void submitLogin() {
         SceneNavigator.goToDashboard();
     }
+
+
+    @FXML
+    public void handleToRegister() {
+        SceneNavigator.goToRegister();
+    }
 }
