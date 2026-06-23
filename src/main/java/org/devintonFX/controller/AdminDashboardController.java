@@ -1,4 +1,4 @@
-package com.mycompany.javafxapp;
+package org.devintonFX.controller;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

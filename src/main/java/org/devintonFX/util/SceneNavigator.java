@@ -21,7 +21,7 @@ public class SceneNavigator {
 
     public static void goToDashboard() {
         try {
-            Main.loadScene("/view/dashboard.fxml", "Dashboard");
+            Main.loadScene("/view/CustomerDashboard.fxml", "Dashboard");
         }catch (Exception e){
             e.printStackTrace();
         }
